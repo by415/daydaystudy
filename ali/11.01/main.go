@@ -14,12 +14,41 @@ import "fmt"
 //}
 
 //3
-func incr(p *int) int {
-    *p++
-    return *p
-}
+//func incr(p *int) int {
+//    *p++
+//    return *p
+//}
+//func main() {
+//    v := 1
+//    incr(&v)
+//    fmt.Println(v)
+//}
+
+
+//type ConfigOne struct {
+//    Daemon string
+//}
+//
+//func (c *ConfigOne) String() string {
+//    return fmt.Sprintf("print: %v", c)
+//}
+//
+//func main() {
+//    c := &ConfigOne{}
+//    c.String()
+//}
+
 func main() {
-    v := 1
-    incr(&v)
-    fmt.Println(v)
+    var a = []int{1, 2, 3, 4, 5}
+    var r = make([]int, 0)
+
+    for i, v := range a {
+        if i == 0 {
+			fmt.Println(a)
+        }
+
+        r = append(r, v)
+    }
+
+    fmt.Println(r)
 }

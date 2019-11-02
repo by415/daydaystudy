@@ -48,3 +48,67 @@ func main() {
 ```
 
 答案解析：输出2，p 是指针变量，指向变量 v，*p++操作的意思是取出变量v的值并执行加一操作，所以v的最终值是 2。go语言中++,--只能作为语句不能作为表达式，也就是a=n++是不允许的，a++和a--表示a += 1;a -= 1--->a = a+1;a = a - 1。
+
+
+1.请指出下面代码的错误？
+
+```
+package main
+
+var gvar int 
+
+func main() {  
+    var one int   
+    two := 2      
+    var three int 
+    three = 3
+
+    func(unused string) {
+        fmt.Println("Unused arg. No compile error")
+    }("what?")
+}
+```
+
+答案：变量one two three三个变量声明但是未使用，go语言中不允许。
+
+
+2.下面代码输出什么？
+
+```
+type ConfigOne struct {
+    Daemon string
+}
+
+func (c *ConfigOne) String() string {
+    return fmt.Sprintf("print: %v", c)
+}
+
+func main() {
+    c := &ConfigOne{}
+    c.String()
+}
+```
+
+答案：栈溢出，类型实现自己，格式化输出的时候会递归的调用自己。
+
+
+3.下面代码输出什么？
+
+```
+func main() {
+    var a = []int{1, 2, 3, 4, 5}
+    var r = make([]int, 0)
+
+    for i, v := range a {
+        if i == 0 {
+            a = append(a, 6, 7)
+        }
+
+        r = append(r, v)
+    }
+
+    fmt.Println(r)
+}
+```
+
+输出[1 2 3 4 5]，range的时候使用的那个状态的a的副本，所以在循环中操作a没有影响当时的副本
