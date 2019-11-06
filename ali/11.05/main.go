@@ -16,3 +16,11 @@ import "fmt"
 //        x = "default"
 //    }
 //}
+
+func main() {
+    var x string = nil
+
+    if x == nil {
+        x = "default"
+    }
+}
