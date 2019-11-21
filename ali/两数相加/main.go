@@ -35,7 +35,7 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
     for l1!= nil || l2!= nil {
         var cur *ListNode = &ListNode{0,nil}
         if (l1 == nil) {
-            sum = ((*l2).Val) + sign
+            sum = l2 -> Val + sign
             l2 = (*l2).Next
         } else if (l2 == nil){
             sum = ((*l1).Val) +sign
