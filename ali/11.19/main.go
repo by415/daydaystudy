@@ -23,8 +23,9 @@ import "fmt"
 //    f2()
 //}
 func twoSum(nums []int, target int) []int {
-	var ret = make([]int, 2)
-    for i := 0; i < len(nums); i++ {
+	var ret []int = make([]int, 2)
+    //var ret = []int{0,0}
+	for i := 0; i < len(nums); i++ {
         for j := 0; j < len(nums); j++ {
             if(i == j) {
                 continue
@@ -40,6 +41,11 @@ func twoSum(nums []int, target int) []int {
 }
 
 func main() {
+	var p *[]int = new([]int)
+	if (*p == nil) {
+		fmt.Println("aaaaaaaaa")
+	}
+	fmt.Println(p,*p)
 	var nums = []int{2,7,11,13}
 	var target int = 20
 	fmt.Println(twoSum(nums,target))
