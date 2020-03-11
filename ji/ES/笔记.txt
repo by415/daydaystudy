@@ -1,0 +1,100 @@
+1.ElasticSearch产生背景
+	1.海量数据组合条件查询
+	2.毫秒级或者秒级返回数据
+ElasticSearch vs Lucene
+　　1.成品与半成品的关系
+　　2.Lucene专注于搜索底层的建设，而ElasticSearch专注于企业应用。	
+2.为什么不能使用root启动ES
+	在6.xx之前，由于ElasticSearch可以接收用户输入的脚本并且执行，黑客可以通过ElasticSearch获取root密码权限，为了系统安全考虑
+	
+搜索白痴搜出特朗普
+	
+
+1.局部更新为什么比全量覆盖快？
+2.映射返回信息解读
+3.查询和过滤的对比
+4.聚合查询
+5.分词器
+6.三种分页方式
+https://www.cnblogs.com/jpfss/p/10815206.html
+
+
+text与keyword均为字符串类型，其中text为可分词，不可以参与聚合，keyword为不可分词 ，可以参与聚合
+
+term: term 主要用于精确匹配哪些值，比如数字，日期，布尔值或 not_analyzed 的字符串(未经分析的文本数据类型)，搜索前不会再对搜索词进行分词，所以我们的搜索词必须是文档分词集合中的一个。
+match: match查询会先对搜索词进行分词,分词完毕后再逐个对分词结果进行匹配，因此相比于term的精确搜索，match是分词匹配搜索
+range: 范围查询
+bool：布尔查询【must true and】【must_not false not】【should  or】【filter】
+
+
+
+
+ignore_above， 默认值是256，该参数的意思是，当字段文本的长度大于指定值时，不做倒排索引。也就是说，当字段文本的长度大于指定值时，聚合、全文搜索都查不到这条数据。
+ignore_above 最大值是32766，但是要根据场景来设置，比如说中文最大值应该是设定在10922。
+ignore_above 背后实际的含义是，Lucene对一个文本的解析长度，当这个长度大于32766时，将不会落实analyze行为。
+
+ES嵌套类型
+
+
+filter {
+    ruby { 
+        code => "event.set('timestamp', event.get('@timestamp').time.localtime + 8*60*60)" 
+    }
+    ruby {
+       code => "event.set('@timestamp',event.get('timestamp'))"
+    }
+    mutate {
+        remove_field => ["timestamp"]
+    }
+    ruby {
+        code => "event.timestamp.time.localtime"
+    }
+}
+
+ignore_malformed：取值可以为true或false，默认值是false。若想要忽略格式错误的数值，则应该设置为true。
+
+
+
+
+改进措施1
+将mysql中的mytime类型在logstash中作一个转换
+
+statement => "select *, DATE_FORMAT(mytime,'%Y-%m-%d %T') as myctime from mytable where id >:sql_last_value"
+
+ES中将体现的      "mytime ": "2018-07-01 10:28:39"，存储类型type为text
+
+ 
+
+改进措施2
+将mysql中的mytime数据在logstash中作一个8小时追加
+
+filter{ ruby 
+        { 
+            code => "event.set('mytime', event.get('mytime').time.localtime + 8*60*60)" 
+        }}
+
+
+
+一个节点可以有多个主分片
+一个节点只能有一个同样副本  不可能出现两个一样的副本都在一个节点
+当加入新节点时  副本会被重新分配  主分片也变
+
+只有副本的分片  宕机后集群自动重新分配副本  集群依然为绿色
+当有主分片的机器宕机后  副本会成为主分片 
+
+
+
+./elasticsearch  -d -E node.name=node-1 -E http.port=9200 -E transport.port=9300 -E path.data=/ES/node1/data -E path.logs=/ES/node1/logs
+./elasticsearch  -d  -E node.name=node-2 -E http.port=9201 -E transport.port=9301 -E path.data=/ES/node2/data -E path.logs=/ES/node2/logs
+./elasticsearch  -d  -E node.name=node-3 -E http.port=9202 -E transport.port=9302 -E path.data=/ES/node3/data -E path.logs=/ES/node3/logs
+
+./elasticsearch    -E node.name=node-4 -E http.port=9203 -E transport.port=9303 -E path.data=/ES/node4/data -E path.logs=/ES/node4/logs
+
+
+
+
+
+
+
+
+
