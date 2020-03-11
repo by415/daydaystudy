@@ -8,7 +8,7 @@ ElasticSearch是一个分布式，高性能、高可用、可伸缩的搜索和�
 
 Elastic Stack,前身缩写是ELK，就是ElasticSearch + LogStash + Kibana
 
-![elasticstack0](Picture\elasticstack0.jpg)
+![elasticstack0](Picture/elasticstack0.jpg)
 
 ES的使用场景:
 
@@ -100,13 +100,13 @@ Elasticsearch是面向文档的，文档是所有可搜索数据的最小单元�
 
 ##### 倒排索引
 
-![倒排1](Picture\倒排1.jpg)
+![倒排1](Picture/倒排1.jpg)
 
 - DocID：出现某单词的文档ID
 - TF(词频)：单词在该文档中出现的次数
 - POS：单词在文档中的位置
 
-![倒排二](Picture\倒排二.jpg)
+![倒排二](Picture/倒排二.jpg)
 
 # 2.linux ES的安装(elasticsearch-7.3.2)
 
@@ -118,7 +118,7 @@ Elasticsearch是面向文档的，文档是所有可搜索数据的最小单元�
 
 执行结果如下：
 
-![启动报错](Picture\启动报错.jpg)
+![启动报错](Picture/启动报错.jpg)
 
 这个错误，是因为使用root用户启动elasticsearch，elasticsearch是不允许使用root用户启动的
 
@@ -224,13 +224,13 @@ cd /opt/elasticsearch-7.3.2/bin
 
 安装成功：
 
-![es安装成功](Picture\es安装成功.png)
+![es安装成功](Picture/es安装成功.png)
 
 # 3.elasticsearch-head 的安装
 
 google应用商店下载插件安装（需翻墙）：
 
-![elasticsearch_head](Picture\elasticsearch_head.png)
+![elasticsearch_head](Picture/elasticsearch_head.png)
 
 
 
@@ -258,7 +258,7 @@ i18n.locale: "zh-CN"
 
 # 写请求原理
 
-![写流程](Picture\写流程.png)
+![写流程](Picture/写流程.png)
 
 以下是写单个文档所需的步骤：
 (1 ）客户端向 NODE I 发送写请求。
@@ -1128,17 +1128,17 @@ IK分词器 Elasticsearch插件地址：https://github.com/medcl/elasticsearch-a
 
 **注意选择对应es的版本**
 
-**![ik](Picture\ik.png)**
+**![ik](Picture/ik.png)**
 
 **1.下载项目  zip包**
 
-**![ik2](Picture\ik2.png)**
+**![ik2](Picture/ik2.png)**
 
 **2.解压项目**
 
 **3.进入项目跟目录 使用maven编译打包此项目**
 
-**![ik3](Picture\ik3.png)**
+**![ik3](Picture/ik3.png)**
 
 ```
 mvn clean
@@ -1148,7 +1148,7 @@ mvn package
 
 **4.执行完上面命令后 在{project_path}/elasticsearch-analysis-ik/target/releases/elasticsearch-analysis-ik-*.zip会有个zip,上传到linux   elasticsearch 插件目录, 如: plugins/ik   注意在plugins下新建ik目录  将zip包上传到ik目录下**
 
-**![ik4](Picture\ik4.jpg)**
+**![ik4](Picture/ik4.jpg)**
 
 **5.使用unzip命令解压zip包，没有unzip的  可先下载unzip   命令：yum install -y unzip zip**
 
@@ -1158,11 +1158,11 @@ mvn package
 
 **vim   {path}/plugins/ik/plugin-descriptor.properties**
 
-**![6](Picture\6.png)**
+**![6](Picture/6.png)**
 
 **8.重启 ik插件安装完成**
 
-**![ik5](Picture\ik5.jpg)**
+**![ik5](Picture/ik5.jpg)**
 
 **9.测试中文分词器效果**
 
@@ -1620,13 +1620,13 @@ http.cors.allow-origin: "*"
 
 **启动后效果**
 
-**![集群效果](Picture\集群效果.png)**
+**![集群效果](Picture/集群效果.png)**
 
 ### **一台机器搭建集群(一)**
 
 **注意修改jvm.options**
 
-**![danji](Picture\danji.png)**
+**![danji](Picture/danji.png)**
 
 ##### **elasticsearch-7.3.2_node1**
 
@@ -1689,13 +1689,13 @@ http.cors.allow-origin: "*"
 
 ### **一台机器搭建集群(二)**
 
-**![dnaji二](Picture\dnaji二.png)**
+**![dnaji二](Picture/dnaji二.png)**
 
 **新建目录：**
 
-**![danjidata](Picture\danjidata.png)**
+**![danjidata](Picture/danjidata.png)**
 
-**![danjilogs](Picture\danjilogs.png)**
+**![danjilogs](Picture/danjilogs.png)**
 
 **注意赋予权限**
 
